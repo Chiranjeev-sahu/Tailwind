@@ -1,7 +1,7 @@
 Documenting my frontend journey
 
-1.tailwind theming with @theme tag:
-**<Hero/>**
+# 1.tailwind theming with @theme tag:
+# **Hero.jsx and App.jsx**
 
 (read from https://tailwindcss.com/docs/theme)
 
@@ -100,3 +100,36 @@ The `@theme` directive in `index.css` is used to extend and customize Tailwind's
 ```
 
 In this project, we are defining a custom CSS variable `--color-primary` with an `oklch` color value. This variable is then available to be used throughout the CSS and in the Tailwind configuration. By defining this variable within the `@theme` block, we can then use it in our `tailwind.config.js` to create a custom color utility. For example, we can add `primary: 'var(--color-primary)'` to the `theme.extend.colors` object in the config file. This allows us to use classes like `text-primary`, `bg-primary`, etc., which will apply the defined `oklch` color. This is a powerful way to create a consistent color scheme and theme for your application.
+
+# 2. Responsiveness and Navigation
+
+This project focused on creating a responsive navbar with a hamburger menu for mobile devices and implementing client-side navigation.
+
+## Key Concepts & Utilities
+
+### Tailwind CSS Responsive Design
+
+-   **Breakpoints (`md:`, `lg:`, etc.)**: Used to apply utility classes conditionally at different screen sizes. This is the core of Tailwind's mobile-first responsive design approach.
+    -   `hidden`: Hides an element completely (`display: none`).
+    -   `md:flex`: Applies `display: flex` only on medium screens and larger.
+    -   `md:hidden`: Hides an element on medium screens and larger, making it visible only on mobile.
+
+### React Concepts
+
+-   **State Management (`useState`)**: The `useState` hook was used to manage the open/closed state of the mobile menu.
+-   **Conditional Rendering**:
+    -   **Ternary Operator**: Used to switch between the hamburger and close icons (`isMenuOpen ? <CloseIcon /> : <HamburgerIcon />`).
+    -   **Boolean Short-circuiting**: Used to conditionally render the entire mobile menu block (`isMenuOpen && <MobileMenu />`).
+-   **Client-Side Routing (`react-router-dom`)**:
+    -   `<BrowserRouter>`: The parent component that provides routing context to the entire application. It must wrap the root `App` component, usually in `main.jsx`.
+    -   `<Link>`: A component used instead of an `<a>` tag for internal navigation. It prevents full-page reloads, enabling a smooth single-page application (SPA) experience. The `href` attribute is replaced with `to`.
+
+### SVG and Icons
+
+-   **Inline SVGs**: We explored the structure of an SVG, including the `viewBox` for scalability and the `d` attribute for path commands.
+-   **Styling SVGs**: Learned to style SVGs using Tailwind classes, and the utility of `stroke="currentColor"` to make an icon inherit its parent's text color.
+-   **Icon Libraries (`@heroicons/react`)**: Understood that creating SVGs by hand is rare. The standard practice is to use libraries like Heroicons, which provide pre-made icons as easy-to-use React components, making the code cleaner and development faster.
+
+### Advanced CSS Concepts
+
+-   **Margin Collapse**: Investigated why a child element's top margin can "leak" out and push its parent down. We learned that this happens when there is no border or padding to separate the margins. The fix is often to use padding on the parent (`pt-1.5`) instead of a margin on the child (`mt-1.5`).
