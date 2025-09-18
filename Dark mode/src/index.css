@@ -1,0 +1,27 @@
+@import "tailwindcss";
+:root {
+  
+  --background: var(--color-neutral-950);
+  --foreground: var(--color-neutral-50);
+  --pattern-fg: rgba(117, 219, 250, 0.925);
+}
+
+.dark {
+  --pattern-fg: rgb(255, 254, 254);
+  --background: var(--color-neutral-50);
+  --foreground: var(--color-neutral-950);
+}
+
+
+@theme{
+  --animate-marquee : marquee 4s linear infinite;
+
+  @keyframes marquee{
+    from{
+      transform : translateX(-100%);
+    }
+    to{
+      transform : translateX(100%);  
+    }
+  }
+}

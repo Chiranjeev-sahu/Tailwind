@@ -133,3 +133,99 @@ This project focused on creating a responsive navbar with a hamburger menu for m
 ### Advanced CSS Concepts
 
 -   **Margin Collapse**: Investigated why a child element's top margin can "leak" out and push its parent down. We learned that this happens when there is no border or padding to separate the margins. The fix is often to use padding on the parent (`pt-1.5`) instead of a margin on the child (`mt-1.5`).
+
+# 3. CSS Mask Utilities
+
+CSS mask utilities in Tailwind CSS control how content is revealed or hidden using linear gradients. These utilities are perfect for creating smooth fade effects and managing content overflow.
+
+## Available Mask Classes
+
+- **`mask-l`**: Creates a left-to-right gradient mask (content fades from left edge)
+- **`mask-r`**: Creates a right-to-left gradient mask (content fades from right edge)
+- **`mask-t`**: Creates a top-to-bottom gradient mask (content fades from top edge)
+- **`mask-b`**: Creates a bottom-to-top gradient mask (content fades from bottom edge)
+- **`mask-tl`**: Creates a top-left corner fade
+- **`mask-tr`**: Creates a top-right corner fade
+- **`mask-bl`**: Creates a bottom-left corner fade
+- **`mask-br`**: Creates a bottom-right corner fade
+
+## Common Use Cases
+
+### 1. Text Overflow Fade
+Perfect for long text that needs to fade at edges:
+
+```jsx
+<div className="w-64 overflow-hidden">
+  <p className="mask-r">
+    This is a very long text that will fade out on the right side
+  </p>
+</div>
+```
+
+### 2. Image Galleries
+Fade images at container edges:
+
+```jsx
+<div className="flex overflow-hidden">
+  <img className="mask-r" src="image1.jpg" />
+  <img className="mask-l mask-r" src="image2.jpg" />
+  <img className="mask-l" src="image3.jpg" />
+</div>
+```
+
+### 3. Scrollable Content with Fade Effects
+Create smooth fade effects in scrollable areas:
+
+```jsx
+<div className="relative">
+  {/* Top fade */}
+  <div className="absolute top-0 left-0 w-full h-8 mask-b bg-gradient-to-b from-white to-transparent"></div>
+  
+  {/* Scrollable content */}
+  <div className="overflow-y-auto h-64">
+    {/* Your scrollable content */}
+  </div>
+  
+  {/* Bottom fade */}
+  <div className="absolute bottom-0 left-0 w-full h-8 mask-t bg-gradient-to-t from-white to-transparent"></div>
+</div>
+```
+
+### 4. Advanced Example: Bilateral Fade
+Content that fades on both sides:
+
+```jsx
+function FadeText() {
+  return (
+    <div className="w-80 h-20 overflow-hidden relative">
+      {/* Left fade overlay */}
+      <div className="absolute left-0 top-0 w-8 h-full mask-r bg-gradient-to-r from-white to-transparent z-10"></div>
+      
+      {/* Right fade overlay */}
+      <div className="absolute right-0 top-0 w-8 h-full mask-l bg-gradient-to-l from-white to-transparent z-10"></div>
+      
+      {/* Scrollable content */}
+      <div className="overflow-x-auto">
+        <p className="whitespace-nowrap p-4">
+          This is a very long text that will fade on both sides
+        </p>
+      </div>
+    </div>
+  );
+}
+```
+
+## Key Points
+
+- **Works with gradients**: Usually combined with `bg-gradient-*` classes
+- **Creates smooth transitions**: No harsh edges, perfect for UI polish
+- **Perfect for overflow**: Hides content that extends beyond containers
+- **Responsive**: Works on all screen sizes
+- **Performance**: CSS-based, no JavaScript required
+
+## Best Practices
+
+1. **Combine with gradients**: Use `bg-gradient-*` classes for the fade effect
+2. **Use appropriate z-index**: Ensure mask overlays appear above content
+3. **Consider accessibility**: Ensure important content isn't hidden by masks
+4. **Test on different screen sizes**: Verify fade effects work responsively
