@@ -1,4 +1,5 @@
-import './App.css'
+import { useState, useEffect } from "react";
+import "./App.css";
 const ClaudeLogo = ({ className }) => {
   return (
     <svg
@@ -122,49 +123,58 @@ const MetaIconOutline = ({ className }) => {
 const Pattern = () => {
   return (
     <div className="absolute inset-0 bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed"></div>
-  )
-}
+  );
+};
 const icons = [
   {
     title: "Claude",
     circle: "circle-1",
-    icon: <ClaudeLogo className="size-4" />
+    icon: <ClaudeLogo className="size-4" />,
   },
   {
     title: "OpenAI",
     circle: "circle-3",
-    icon: <OpenAILogo className="size-4 dark:text-white" />
+    icon: <OpenAILogo className="size-4 dark:text-white" />,
   },
   {
     title: "Meta",
     circle: "circle-4",
-    icon: <MetaIconOutline className="size-6" />
+    icon: <MetaIconOutline className="size-6" />,
   },
   {
     title: "Gemini",
     circle: "circle-5",
-    icon: <GeminiLogo className="size-4" />
-  }
+    icon: <GeminiLogo className="size-4" />,
+  },
 ];
 
-const handleclick = () => {
-  document.documentElement.classList.toggle("dark");
-  const currentTheme = document.documentElement.classList.contains("dark") ? "dark" : "light";
-  localStorage.setItem("theme", currentTheme);
-}
 function App() {
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const handleclick = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   return (
     <>
-      <div className="relative h-full w-full flex items-center justify-center pt-30">
-        <div className="relative z-10 h-140 w-100 bg-neutral-200 dark:bg-neutral-900 shadow-2xl border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden">
-          <div className='relative mask-r-from-50% mask-l-from-50% mask-b-from-50% mask-t-from-50% h-[50%] flex items-center'>
+      <div className="relative flex h-full w-full items-center justify-center pt-30">
+        <div className="relative z-10 h-140 w-100 overflow-hidden rounded-xl border border-neutral-200 bg-neutral-200 shadow-2xl dark:border-neutral-800 dark:bg-neutral-900">
+          <div className="relative flex h-[50%] items-center mask-t-from-50% mask-r-from-50% mask-b-from-50% mask-l-from-50%">
             <Pattern />
-            <div className="flex items-center gap-10 justify-center h-40 animate-marquee">
+            <div className="animate-marquee flex h-40 items-center justify-center gap-10">
               {icons.map((item, index) => (
                 <div
                   key={item.title}
-                  className="rounded-full bg-neutral-400 flex items-center justify-center size-12"
+                  className="flex size-12 items-center justify-center rounded-full bg-neutral-400 dark:bg-neutral-700"
                 >
                   {item.icon}
                 </div>
@@ -172,19 +182,26 @@ function App() {
             </div>
           </div>
           <div className="p-4">
-            <h1 className="text-neutral-400 text-[28px]">IMGNNAKMSLOLOLOLOLLMAAAOOO</h1>
-            <p className='text-neutral-400 text-xs'>
-              huhhuhuhluhlulluulhulhulhuhh — here are some more words added to this sentence to make it longer and more descriptive for demonstration purposes.ykwim??
+            <h1 className="text-[28px] text-neutral-400">
+              IMGNNAKMSLOLOLOLOLLMAAAOOO
+            </h1>
+            <p className="text-xs text-neutral-400">
+              huhhuhuhluhlulluulhulhulhuhh — here are some more words added to
+              this sentence to make it longer and more descriptive for
+              demonstration purposes.ykwim??
             </p>
-            <button onClick={handleclick} className='px-2 py-1 rounded-lg bg-neutral-100 text-[10px] text-neutral-500 mt-4 cursor-pointer'>Switch me</button>
+            <button
+              onClick={handleclick}
+              className="mt-4 cursor-pointer rounded-lg bg-neutral-100 px-2 py-1 text-[10px] text-neutral-500 dark:bg-neutral-800 dark:text-neutral-300"
+            >
+              Switch me
+            </button>
           </div>
         </div>
       </div>
-      <div className="absolute inset-0 bg-white"></div>
-
+      <div className="absolute inset-0 bg-white dark:bg-neutral-950"></div>
     </>
-  )
+  );
 }
 
-
-export default App
+export default App;
