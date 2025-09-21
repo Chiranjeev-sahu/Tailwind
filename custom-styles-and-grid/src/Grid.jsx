@@ -4,7 +4,7 @@ import { Button } from './Button'
 export const Grid = ({ children }) => {
     return (
         <div className="relative mt-0.5 w-full h-full align ">
-            <div className='flex justify-evenly bg-zinc-800 '>
+            <div className='flex justify-evenly bg-zinc-800 gap-[2px]'>
                 {children}
             </div>
         </div>

@@ -8,7 +8,7 @@ export const Button = ({ icon1 = "?", icon2 = "", width = 4, height = 4, bottomB
 
     };
     return (
-        <button className={`flex justify-center items-center text-white ${bottomBorder ? 'border-b-4' : 'border'} border-white/50 bg-black hover:shadow-gray-400 rounded-xl shadow-[1px_9px_24px_0px_#CFCFCF] hover:scale-98 transition-transform duration-200 ease-in m-[1px] mb-[2px]`} style={style}>
+        <button className={`flex justify-center items-center text-white ${bottomBorder ? 'border-b-4 border-white/50' : ''} bg-black rounded-xl shadow-[1px_9px_24px_0px_#949494] hover:shadow-gray-400 hover:scale-98 transition-transform duration-200 ease-in mb-1.5`} style={style}>
             {icon2 ? (
                 <div className='flex flex-col h-10 justify-items-center'>
                     <div>{icon1}</div>
